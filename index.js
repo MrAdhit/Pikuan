@@ -23,7 +23,7 @@ client.on("message", async(message)=>{
     } catch (e) {
         message.reply("cmd not found");
     }
-})
+});
 
 let log = function(message){
     console.log(message)
