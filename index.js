@@ -2,8 +2,13 @@ let debug = typeof v8debug === 'object' || /--debug|--inspect/.test(process.argv
 (debug ? require('dotenv').config() : "");
 
 const { Client } = require("discord.js");
+const Manager = require("./Manager/Manager");
+const User = require("./Manager/UserManager");
 
 const client = new Client();
+const manager = new Manager(client);
+
+const user = new User();
 
 const defaultPrefix = process.env.PREFIX;
 
