@@ -16,6 +16,19 @@ class UserManager extends Manager{
     }
 
     /**
+     * Create new user or overwrite existing
+     * @param {string} userid User ID
+     * @param {string} username Username
+     * @param {number} money Money amount
+     */
+    createUser(userid, username, money){
+        fs.writeFileSync(this.getPath(userid), JSON.stringify({
+            username: username,
+            money: money
+        }, null, 2));
+    }
+
+    /**
      * Get User Money
      * @param {string} userid User ID
      */
@@ -23,7 +36,6 @@ class UserManager extends Manager{
         if(!this.isExist(userid)) return {error: true, code: 0}
         return this.getJSON(userid).money;
     }
-
 
     /**
      * Add money to User

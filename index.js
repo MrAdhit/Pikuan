@@ -10,9 +10,12 @@ const manager = new Manager(client);
 
 const user = new User();
 
+const merged = {client, user};
+
 const defaultPrefix = process.env.PREFIX;
 
 client.on("ready", ()=>{
+    
     log(`${client.user.username} siap di ${client.guilds.fetch.length} guilds`);
 });
 
@@ -24,7 +27,12 @@ client.on("message", async(message)=>{
     if(prefix != defaultPrefix) return;
 
     try {
-        await require(`./commands/${command}`).run(client, message, args);
+        let cmd = await require(`./commands/${command}`);
+        if(cmd.aliasOf != undefined){
+            await require(`./commands/${cmd.aliasOf}`).run(merged, message, args);
+        }else{
+            await cmd.run(merged, message, args);
+        }
     } catch (e) {
         message.reply("cmd not found");
     }

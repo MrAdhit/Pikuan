@@ -9,6 +9,7 @@ let commands = fs.readdirSync("./commands");
 describe("Testing Command", ()=>{
     commands.forEach((command)=>{
         let cmd = require("../commands/"+command.replace(".js", ""))
+        if(cmd.aliasOf != undefined) return;
         describe(`Testing ${command}`, ()=>{
             it(`${command} name should be string`, (done)=>{
                 assert.equal(typeof(cmd.name), "string")
