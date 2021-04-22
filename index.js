@@ -11,7 +11,7 @@ client.on("ready", ()=>{
     log(`${client.user.username} siap di ${client.guilds.fetch.length} guilds`);
 });
 
-client.on("message", (message)=>{
+client.on("message", async(message)=>{
     let args = message.content.split(" ").slice(2);
     let command = message.content.split(" ")[1];
     let prefix = message.content.split(" ")[0];
@@ -19,7 +19,7 @@ client.on("message", (message)=>{
     if(prefix != defaultPrefix) return;
 
     try {
-        require(`./commands/${command}`).run(client, message);
+        await require(`./commands/${command}`).run(client, message, args);
     } catch (e) {
         message.reply("cmd not found");
     }
