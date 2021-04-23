@@ -1,8 +1,10 @@
 const assert = require('assert');
 const fs = require("fs");
 const User = require("../Manager/UserManager");
+const Guild = require("../Manager/GuildManager");
 
 const user = new User();
+const guild = new Guild();
 
 let commands = fs.readdirSync("./commands");
 
@@ -47,3 +49,19 @@ describe("Testing UserManager", ()=>{
         assert.deepStrictEqual(user.getJSON("a"), {username: "a", money: 10});
     })
 });
+
+describe("Testing GuildManager", ()=>{
+    it("getPrefix should return pik", ()=>{
+        assert.strictEqual(guild.getPrefix("a"), "pik");
+    });
+    it("setPrefix should return object with pik1 prefix", ()=>{
+        assert.deepStrictEqual(guild.setPrefix("a", "pik1"), {name: "test", prefix: "pik1"});
+        assert.deepStrictEqual(guild.setPrefix("a", "pik"), {name: "test", prefix: "pik"});
+    });
+    it("isExist should return true", ()=>{
+        assert.deepStrictEqual(guild.isExist("a"), true);
+    });
+    it("getJSON should return the data itself", ()=>{
+        assert.deepStrictEqual(guild.getJSON("a"), {name: "test", prefix: "pik"});
+    });
+})
