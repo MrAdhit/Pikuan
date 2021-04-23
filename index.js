@@ -14,8 +14,6 @@ const guildm = new Guild();
 
 const merged = {client, user};
 
-const defaultPrefix = process.env.PREFIX;
-
 client.on("ready", ()=>{
     log(`${client.user.username} siap di ${client.guilds.fetch.length} guilds`);
 });
