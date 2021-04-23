@@ -4,11 +4,13 @@ let debug = typeof v8debug === 'object' || /--debug|--inspect/.test(process.argv
 const { Client } = require("discord.js");
 const Manager = require("./Manager/Manager");
 const User = require("./Manager/UserManager");
+const Guild = require("./Manager/GuildManager");
 
 const client = new Client();
 const manager = new Manager(client);
 
 const user = new User();
+const guildm = new Guild();
 
 const merged = {client, user};
 
@@ -23,8 +25,9 @@ client.on("message", async(message)=>{
     let args = message.content.split(" ").slice(2);
     let command = message.content.split(" ")[1];
     let prefix = message.content.split(" ")[0];
+    let guildPrefix = guildm.getPrefix(message.guild.id);
 
-    if(prefix != defaultPrefix) return;
+    if(prefix != guildPrefix) return;
 
     try {
         let cmd = await require(`./commands/${command}`);
@@ -37,6 +40,14 @@ client.on("message", async(message)=>{
         message.reply("cmd not found");
     }
 });
+
+client.on("guildCreate", (guild)=>{
+    guildm.createConfig(guild.id, guild.name);
+});
+
+client.on("guildDelete", (guild)=>{
+    guildm.deleteConfig(guild.id);
+})
 
 let log = function(message){
     console.log(message)
