@@ -4,7 +4,8 @@ module.exports = {
     run: async function(merged, message, args){
         if(!merged.user.isExist(message.author.id)) merged.user.createUser(message.author.id, message.author.username, 10);
         if(args[0] == undefined) return message.channel.send(`:no_entry_sign: <@!${message.author.id}> Saya tidak dapat menemukan user itu!`);
-        let user = merged.client.users.cache.get(args[0].replace("<@!", "").replace(">", ""));
+        merged.client.users.fetch(args[0].replace("<@!", "").replace(">", "").replace("<@", ""));
+        let user = merged.client.users.cache.get(args[0].replace("<@!", "").replace(">", "").replace("<@", ""));
         if(user.bot) return message.channel.send(`:no_entry_sign: <@!${message.author.id}> Kamu tidak dapet mengirimkan pik ke bot!`);
         if(args[1] == undefined) return message.channel.send(`:no_entry_sign: <@!${message.author.id}> Masukkan jumlah uang yang mau dikirim!`);
         if(!merged.user.isExist(user.id)) return message.channel.send(`:no_entry_sign: <@!${message.author.id}> Saya tidak dapat menemukan user itu!`);

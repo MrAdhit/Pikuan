@@ -17,7 +17,6 @@ const merged = {client, user};
 const defaultPrefix = process.env.PREFIX;
 
 client.on("ready", ()=>{
-    
     log(`${client.user.username} siap di ${client.guilds.fetch.length} guilds`);
 });
 
@@ -28,7 +27,7 @@ client.on("message", async(message)=>{
     let guildPrefix = guildm.getPrefix(message.guild.id);
 
     if(prefix != guildPrefix) return;
-
+    
     try {
         let cmd = await require(`./commands/${command}`);
         if(cmd.aliasOf != undefined){
