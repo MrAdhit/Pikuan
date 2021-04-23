@@ -9,7 +9,8 @@ module.exports = {
         if(args[1] == undefined) return message.channel.send(`:no_entry_sign: <@!${message.author.id}> Masukkan jumlah uang yang mau dikirim!`);
         if(!merged.user.isExist(user.id)) return message.channel.send(`:no_entry_sign: <@!${message.author.id}> Saya tidak dapat menemukan user itu!`);
         if(args[1] < 50) return message.channel.send(`:no_entry_sign: <@!${message.author.id}> Kamu harus mengirim minimal 50 pik`);
-
+        if(args[1] > merged.user.getMoney(message.author.id)) return message.channel.send(`:no_entry_sign: <@!${message.author.id}> Kamu tidak punya cukup uang!`)
+        
         merged.user.removeMoney(message.author.id, args[1]);
         merged.user.addMoney(user.id, args[1]);
 

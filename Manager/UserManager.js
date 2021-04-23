@@ -44,7 +44,7 @@ class UserManager extends Manager{
      * @returns object
      */
     addMoney(userid, amount){
-        return this.setMoney(userid, this.getMoney(userid) + amount);
+        return this.setMoney(userid, this.getMoney(userid) + parseInt(amount));
     }
 
     /**
@@ -54,7 +54,7 @@ class UserManager extends Manager{
      * @returns object
      */
     removeMoney(userid, amount){
-        return this.setMoney(userid, this.getMoney(userid) - amount);
+        return this.setMoney(userid, this.getMoney(userid) - parseInt(amount));
     }
 
     /**
@@ -65,7 +65,7 @@ class UserManager extends Manager{
     setMoney(userid, amount){
         if(!this.isExist(userid)) return {error: true, code: 0}
         let data = this.getJSON(userid);
-        data.money = amount;
+        data.money = parseInt(amount);
         fs.writeFileSync(this.getPath(userid), JSON.stringify(data, null, 2));
         return data;
     }
