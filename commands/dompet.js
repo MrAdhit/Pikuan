@@ -9,8 +9,8 @@ module.exports = {
         let mentUser = 0;
         if(args[0] != undefined) mentUser = merged.client.users.cache.get(args[0].replace("<@!", "").replace(">", ""));
         if(mentUser != 0) { 
-            if(mentUser == undefined) return message.channel.send(`:no_entry_sign: <@!${message.author.id}> Saya tidak dapat menemukan user itu!`); 
-            if(!merged.user.isExist(mentUser.id)) return message.channel.send(`:no_entry_sign: <@!${message.author.id}> Saya tidak dapat menemukan user itu!`); 
+            if(mentUser == undefined) return message.channel.send(lang.parseVariable(lang.getLang("userNotFound"), {userid: message.author.id})); 
+            if(!merged.user.isExist(mentUser.id)) return message.channel.send(lang.parseVariable(lang.getLang("userNotFound"), {userid: message.author.id})); 
         }
         
         message.reply(`${(mentUser == 0) ? "Kamu" : mentUser.username} mempunyai uang ${merged.user.getMoney(((mentUser == 0) ? message.author.id : mentUser.id))} pik`);
