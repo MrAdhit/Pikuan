@@ -2,9 +2,11 @@ const assert = require('assert');
 const fs = require("fs");
 const User = require("../Manager/UserManager");
 const Guild = require("../Manager/GuildManager");
+const Lang = require("../Manager/LangManager");
 
 const user = new User();
 const guild = new Guild();
+const lang = new Lang();
 
 let commands = fs.readdirSync("./commands");
 
@@ -64,4 +66,19 @@ describe("Testing GuildManager", ()=>{
     it("getJSON should return the data itself", ()=>{
         assert.deepStrictEqual(guild.getJSON("a"), {name: "test", prefix: "pik"});
     });
+})
+
+describe("Testing LangManager", ()=>{
+    it("getLang should return a ${message.author.id}", ()=>{
+        assert.strictEqual(lang.getLang("test"), "a {{num}}")
+    })
+    it("getLang undefined should return not found object", ()=>{
+        assert.deepStrictEqual(lang.getLang("a"), {error: true, code: 0})
+    })
+    it("parseVariable should return 9", ()=>{
+        assert.strictEqual(lang.parseVariable(lang.getLang("test"), {num: 9}), "a 9");
+    })
+    it("getJSON should return object", ()=>{
+        assert.strictEqual(typeof(lang.getJSON("test")), "object");
+    })
 })
