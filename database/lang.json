@@ -5,5 +5,7 @@
     "undefinedGiveAmount": ":no_entry_sign: <@!{{userid}}> Masukkan jumlah uang yang mau dikirim!",
     "minimumGiveAmount": ":no_entry_sign: <@!{{userid}}> Kamu harus mengirim minimal 50 pik",
     "notEnoughMoney": ":no_entry_sign: <@!{{userid}}> Kamu tidak punya cukup uang!",
-    "sendMoneySuccess": ":credit_card: <@!{{userid}}> mengirim {{amount}} pik ke {{username}}"
+    "sendMoneySuccess": ":credit_card: <@!{{userid}}> mengirim {{amount}} pik ke {{username}}",
+    "dailyMoney": ":moneybag: | <@!{{userid}}>, Ini hadiah harianmu {{amount}} pik dan mendapatkan item {{item}}",
+    "dailyLimit": ":stopwatch: | <@!{{userid}}>, Kamu dapat claim daily setelah {{date}}"
 }
