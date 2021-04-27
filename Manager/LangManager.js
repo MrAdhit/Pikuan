@@ -1,5 +1,4 @@
 const Manager = require("./Manager");
-const fs = require("fs");
 
 class LangManager extends Manager {
     constructor(){

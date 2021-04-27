@@ -3,10 +3,12 @@ const fs = require("fs");
 const User = require("../Manager/UserManager");
 const Guild = require("../Manager/GuildManager");
 const Lang = require("../Manager/LangManager");
+const Item = require("../Manager/ItemManager");
 
 const user = new User();
 const guild = new Guild();
 const lang = new Lang();
+const item = new Item();
 
 let commands = fs.readdirSync("./commands");
 
@@ -66,7 +68,7 @@ describe("Testing GuildManager", ()=>{
     it("getJSON should return the data itself", ()=>{
         assert.deepStrictEqual(guild.getJSON("a"), {name: "test", prefix: "pik"});
     });
-})
+});
 
 describe("Testing LangManager", ()=>{
     it("getLang should return a ${message.author.id}", ()=>{
@@ -81,4 +83,18 @@ describe("Testing LangManager", ()=>{
     it("getJSON should return object", ()=>{
         assert.strictEqual(typeof(lang.getJSON("test")), "object");
     })
-})
+});
+
+describe("Testing ItemManager", ()=>{
+    it("getJSON should return object", ()=>{
+        assert.deepStrictEqual(typeof(item.getJSON()), "object");
+    });
+    it("getItem should return Batu", ()=>{
+        assert.deepStrictEqual(item.getItem(1, "Forest"), "Batu");
+    });
+    it("getRandom should return string", ()=>{
+        assert.deepStrictEqual(typeof(item.getRandom()), "string");
+        assert.deepStrictEqual(typeof(item.getRandom("Forest")), "string");
+        assert.deepStrictEqual(typeof(item.getRandom("Hunting")), "string");
+    });
+});
