@@ -34,6 +34,7 @@ client.on("message", async(message)=>{
             await cmd.run(merged, message, args);
         }
     } catch (e) {
+        console.log(e)
         message.reply("cmd not found");
     }
 });

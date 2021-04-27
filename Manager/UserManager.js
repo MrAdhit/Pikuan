@@ -25,15 +25,26 @@ class UserManager extends Manager{
         fs.writeFileSync(this.getPath(userid), JSON.stringify({
             username: username,
             money: money,
-            daily: null
+            daily: 0
         }, null, 2));
     }
 
+    /**
+     * Get User Daily Time
+     * @param {string} userid User ID
+     * @returns object
+     */
     getDailyTime(userid){
         if(!this.isExist(userid)) return {error: true, code: 0}
         return this.getJSON(userid).daily;
     }
 
+    /**
+     * Set User Daily Time
+     * @param {string} userid User ID
+     * @param {number} timestamp Timestamp
+     * @returns obkect
+     */
     setDailyTime(userid, timestamp){
         if(!this.isExist(userid)) return {error: true, code: 0}
         let data = this.getJSON(userid);
