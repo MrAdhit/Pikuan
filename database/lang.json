@@ -1,0 +1,9 @@
+{
+    "test": "a {{num}}",
+    "userNotFound": ":no_entry_sign: <@!{{userid}}> Saya tidak dapat menemukan user itu!",
+    "cantGiveToBot": ":no_entry_sign: <@!{{userid}}> Kamu tidak dapet mengirimkan pik ke bot!",
+    "undefinedGiveAmount": ":no_entry_sign: <@!{{userid}}> Masukkan jumlah uang yang mau dikirim!",
+    "minimumGiveAmount": ":no_entry_sign: <@!{{userid}}> Kamu harus mengirim minimal 50 pik",
+    "notEnoughMoney": ":no_entry_sign: <@!{{userid}}> Kamu tidak punya cukup uang!",
+    "sendMoneySuccess": ":credit_card: <@!{{userid}}> mengirim {{amount}} pik ke {{username}}"
+}
