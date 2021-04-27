@@ -38,10 +38,10 @@ module.exports = {
 
             message.channel.send(lang.parseVariable(lang.getLang("dailyMoney"), {userid: message.author.id, amount: amount}));
             message.channel.send(lang.parseVariable(lang.getLang("dailyItem"), {userid: message.author.id, item: dailyItem, amount: lang.smallNum(itemAmount)}));
-            console.log({a: item.getActualItemID(dailyItem), itemAmount, dailyItem})
+            
             merged.user.addItem(message.author.id, item.getActualItemID(dailyItem), itemAmount);
             merged.user.addMoney(message.author.id, amount);
-            // merged.user.setDailyTime(message.author.id, dateTom.valueOf())
+            merged.user.setDailyTime(message.author.id, dateTom.valueOf())
 
             message.channel.send(lang.parseVariable(lang.getLang("dailyLimit"), {useridtag: "", date: `${hours} Jam ${minutes} Menit ${seconds} Detik`}))
         }else{
