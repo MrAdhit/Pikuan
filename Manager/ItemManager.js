@@ -64,8 +64,13 @@ class ItemManager extends Manager {
         return this.getActualJSON()[id];
     }
 
+    /**
+     * Get Item List ID From Value
+     * @param {string} value Item Value
+     * @returns number
+     */
     getActualItemID(value){
-        return this.getActualJSON().findIndex((v, index)=>{ if(v == value) return index });
+        return this.getActualJSON().findIndex((v) => v == value);
     }
 
     /**

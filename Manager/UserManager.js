@@ -25,7 +25,8 @@ class UserManager extends Manager{
         fs.writeFileSync(this.getPath(userid), JSON.stringify({
             username: username,
             money: money,
-            daily: 0
+            daily: 0,
+            inventories: {}
         }, null, 2));
     }
 
@@ -53,11 +54,22 @@ class UserManager extends Manager{
         return data;
     }
 
+    /**
+     * Get Item Amount from User
+     * @param {string} userid User ID
+     * @param {string} id Item ID
+     * @returns number
+     */
     getItemAmount(userid, id){
         if(!this.isExist(userid)) return {error: true, code: 0}
-        return this.getJSON(userid).inventories[id];
+        return this.getJSON(userid).inventories[id.toString()];
     }
 
+    /**
+     * Get user inventory
+     * @param {string} userid User ID
+     * @returns object
+     */
     getInventory(userid){
         if(!this.isExist(userid)) return {error: true, code: 0}
         let arr = [];
@@ -67,6 +79,13 @@ class UserManager extends Manager{
         return arr;
     }
 
+    /**
+     * Add item to User inventory
+     * @param {string} userid User ID
+     * @param {string} id Item ID
+     * @param {number} amount Item Amount
+     * @returns object
+     */
     addItem(userid, id, amount){
         if(!this.isExist(userid)) return {error: true, code: 0}
         let data = this.getJSON(userid).inventories;
@@ -79,6 +98,13 @@ class UserManager extends Manager{
         return data;
     }
 
+    /**
+     * Remove item from User inventory
+     * @param {string} userid User ID
+     * @param {string} id Item ID
+     * @param {number} amount Item Amount
+     * @returns object
+     */
     removeItem(userid, id, amount){
         if(!this.isExist(userid)) return {error: true, code: 0}
         let data = this.getJSON(userid).inventories;
@@ -91,6 +117,12 @@ class UserManager extends Manager{
         return data;
     }
 
+    /**
+     * Replace exisiting Inventory object with the new one
+     * @param {string} userid User ID
+     * @param {object} object Inventory Object
+     * @returns object
+     */
     setItem(userid, object){
         if(!this.isExist(userid)) return {error: true, code: 0}
         let data = this.getJSON(userid);

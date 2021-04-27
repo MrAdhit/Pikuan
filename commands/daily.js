@@ -31,15 +31,21 @@ module.exports = {
             let amount = Math.floor(Math.random() * 200 + 200);
             let itemAmount = Math.floor(Math.random() * 9 + 1);
             let dailyItem = item.getRandom();
-            let itemId = item.getActualItemID(dailyItem);
+            distance = dateTom - date;
+            hours = Math.floor((distance % _day) / _hour);
+            minutes = Math.floor((distance % _hour) / _minute);
+            seconds = Math.floor((distance % _minute) / _second);
 
             message.channel.send(lang.parseVariable(lang.getLang("dailyMoney"), {userid: message.author.id, amount: amount}));
-            message.channel.send(lang.parseVariable(lang.getLang("dailyItem"), {userid: message.author.id, id: itemId, item: dailyItem, amount: lang.smallNum(itemAmount)}));
-
+            message.channel.send(lang.parseVariable(lang.getLang("dailyItem"), {userid: message.author.id, item: dailyItem, amount: lang.smallNum(itemAmount)}));
+            console.log({a: item.getActualItemID(dailyItem), itemAmount, dailyItem})
+            merged.user.addItem(message.author.id, item.getActualItemID(dailyItem), itemAmount);
             merged.user.addMoney(message.author.id, amount);
-            merged.user.setDailyTime(message.author.id, dateTom.valueOf())
+            // merged.user.setDailyTime(message.author.id, dateTom.valueOf())
+
+            message.channel.send(lang.parseVariable(lang.getLang("dailyLimit"), {useridtag: "", date: `${hours} Jam ${minutes} Menit ${seconds} Detik`}))
         }else{
-            message.channel.send(lang.parseVariable(lang.getLang("dailyLimit"), {userid: message.author.id, date: `${hours} Jam ${minutes} Menit ${seconds} Detik`}))
+            message.channel.send(lang.parseVariable(lang.getLang("dailyLimit"), {useridtag: `<@${message.author.id}> `, date: `${hours} Jam ${minutes} Menit ${seconds} Detik`}))
         }
     }
 }

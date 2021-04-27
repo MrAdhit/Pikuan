@@ -1,4 +1,7 @@
 {
   "username": "a",
-  "money": 10
+  "money": 10,
+  "inventories": {
+    "0": -95
+  }
 }

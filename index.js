@@ -15,7 +15,7 @@ const guildm = new Guild();
 const merged = {client, user};
 
 client.on("ready", ()=>{
-    log(user.getItemAmount("405479178738204673", "0"))
+    // log(user.getItemAmount("405479178738204673", "0"))
     log(`${client.user.username} siap di ${client.guilds.fetch.length} guilds`);
 });
 

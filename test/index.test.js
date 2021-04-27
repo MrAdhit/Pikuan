@@ -49,9 +49,21 @@ describe("Testing UserManager", ()=>{
     it("removeMoney should return 10", ()=>{
         assert.strictEqual(user.removeMoney("a", 10).money, 10);
     });
+    it("getItemAmount should return -95", ()=>{
+        assert.strictEqual(user.getItemAmount("a", "0"), -95)
+    });
+    it("getInventories should return the inventory data", ()=>{
+        assert.deepStrictEqual(user.getInventory("a"), [{ amount: -95, id: "0" }])
+    });
+    it("addItem should add the data", ()=>{
+        assert.deepStrictEqual(user.addItem("a", "0", 100), { "0": 5 })
+    });
+    it("removeItem should add the data", ()=>{
+        assert.deepStrictEqual(user.removeItem("a", "0", 100), { "0": -95 })
+    });
     it("getJSON should return the data itself", ()=>{
-        assert.deepStrictEqual(user.getJSON("a"), {username: "a", money: 10});
-    })
+        assert.deepStrictEqual(user.getJSON("a"), { username: "a", money: 10, inventories: { "0": -95 } });
+    });
 });
 
 describe("Testing GuildManager", ()=>{
@@ -103,5 +115,4 @@ describe("Testing ItemManager", ()=>{
         assert.deepStrictEqual(typeof(item.getRandom("Forest")), "string");
         assert.deepStrictEqual(typeof(item.getRandom("Hunting")), "string");
     });
-    
 });
