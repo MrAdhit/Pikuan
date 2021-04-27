@@ -16,11 +16,11 @@ class ItemManager extends Manager {
             case "Forest":
                 let random = Math.floor(Math.random() * job.Forest.length);
 
-                return this.getJSON().Forest[random];
+                return this.getActualItem(this.getJSON().Forest[random]);
             case "Hunting":
                 let randomq = Math.floor(Math.random() * job.Hunting.length);
 
-                return this.getJSON().Hunting[randomq];
+                return this.getActualItem(this.getJSON().Hunting[randomq]);
             default:
                 let randoms = Math.floor(Math.random() * 2);
                 
@@ -28,11 +28,11 @@ class ItemManager extends Manager {
                     case 0:
                         let random = Math.floor(Math.random() * job.Forest.length);
 
-                        return this.getJSON().Forest[random];
+                        return this.getActualItem(this.getJSON().Forest[random]);
                     case 1:
                         let randoma = Math.floor(Math.random() * job.Hunting.length);
 
-                        return this.getJSON().Hunting[randoma];
+                        return this.getActualItem(this.getJSON().Hunting[randoma]);
                 }
                 break;
         }
@@ -44,7 +44,7 @@ class ItemManager extends Manager {
      * @returns string
      */
     getItem(index, job){
-        return this.getJSON()[job][index];
+        return this.getActualItem(this.getJSON()[job][index]);
     }
 
     /**
@@ -52,6 +52,27 @@ class ItemManager extends Manager {
      * @returns objext
      */
     getJSON(){
+        return require("../database/itemStructure.json");
+    }
+
+    /**
+     * Get Item
+     * @param {number} id Item ID
+     * @returns string
+     */
+    getActualItem(id){
+        return this.getActualJSON()[id];
+    }
+
+    getActualItemID(value){
+        return this.getActualJSON().findIndex((v, index)=>{ if(v == value) return index });
+    }
+
+    /**
+     * Get Actual Item JSON
+     * @returns object
+     */
+    getActualJSON(){
         return require("../database/items.json");
     }
 }

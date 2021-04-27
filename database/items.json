@@ -1,9 +1,5 @@
-{
-    "Forest": [
-        "Kayu",
-        "Batu"
-    ],
-    "Hunting": [
-        "Daging"
-    ]
-}
+[
+    ":cut_of_meat:",
+    ":wood:",
+    ":rock:"
+]

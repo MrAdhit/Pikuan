@@ -53,6 +53,52 @@ class UserManager extends Manager{
         return data;
     }
 
+    getItemAmount(userid, id){
+        if(!this.isExist(userid)) return {error: true, code: 0}
+        return this.getJSON(userid).inventories[id];
+    }
+
+    getInventory(userid){
+        if(!this.isExist(userid)) return {error: true, code: 0}
+        let arr = [];
+        for (const [key, value] of Object.entries(this.getJSON(userid).inventories)) {
+            arr.push({id: key, amount: value});
+        }
+        return arr;
+    }
+
+    addItem(userid, id, amount){
+        if(!this.isExist(userid)) return {error: true, code: 0}
+        let data = this.getJSON(userid).inventories;
+        if(id in data){
+            data[id] = parseInt(data[id]) + parseInt(amount);
+        }else{
+            data[id] = parseInt(amount);
+        }
+        this.setItem(userid, data);
+        return data;
+    }
+
+    removeItem(userid, id, amount){
+        if(!this.isExist(userid)) return {error: true, code: 0}
+        let data = this.getJSON(userid).inventories;
+        if(id in data){
+            data[id] = parseInt(data[id]) - parseInt(amount);
+        }else{
+            data[id] = parseInt(amount);
+        }
+        this.setItem(userid, data);
+        return data;
+    }
+
+    setItem(userid, object){
+        if(!this.isExist(userid)) return {error: true, code: 0}
+        let data = this.getJSON(userid);
+        data.inventories = object;
+        fs.writeFileSync(this.getPath(userid), JSON.stringify(data, null, 2));
+        return data;
+    }
+
     /**
      * Get User Money
      * @param {string} userid User ID

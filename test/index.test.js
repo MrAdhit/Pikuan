@@ -95,8 +95,8 @@ describe("Testing ItemManager", ()=>{
     it("getJSON should return object", ()=>{
         assert.deepStrictEqual(typeof(item.getJSON()), "object");
     });
-    it("getItem should return Batu", ()=>{
-        assert.deepStrictEqual(item.getItem(1, "Forest"), "Batu");
+    it("getItem should return :rock:", ()=>{
+        assert.deepStrictEqual(item.getItem(1, "Forest"), ":rock:");
     });
     it("getRandom should return string", ()=>{
         assert.deepStrictEqual(typeof(item.getRandom()), "string");

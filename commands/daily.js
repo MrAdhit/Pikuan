@@ -29,10 +29,12 @@ module.exports = {
         
         if(date.valueOf() >= userTimestamp){
             let amount = Math.floor(Math.random() * 200 + 200);
+            let itemAmount = Math.floor(Math.random() * 9 + 1);
             let dailyItem = item.getRandom();
+            let itemId = item.getActualItemID(dailyItem);
 
             message.channel.send(lang.parseVariable(lang.getLang("dailyMoney"), {userid: message.author.id, amount: amount}));
-            message.channel.send(lang.parseVariable(lang.getLang("dailyItem"), {userid: message.author.id, item: dailyItem}));
+            message.channel.send(lang.parseVariable(lang.getLang("dailyItem"), {userid: message.author.id, id: itemId, item: dailyItem, amount: lang.smallNum(itemAmount)}));
 
             merged.user.addMoney(message.author.id, amount);
             merged.user.setDailyTime(message.author.id, dateTom.valueOf())
