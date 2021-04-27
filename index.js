@@ -15,6 +15,7 @@ const guildm = new Guild();
 const merged = {client, user};
 
 client.on("ready", ()=>{
+    // log(user.getItemAmount("405479178738204673", "0"))
     log(`${client.user.username} siap di ${client.guilds.fetch.length} guilds`);
 });
 
@@ -34,6 +35,7 @@ client.on("message", async(message)=>{
             await cmd.run(merged, message, args);
         }
     } catch (e) {
+        console.log(e)
         message.reply("cmd not found");
     }
 });

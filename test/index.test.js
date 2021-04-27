@@ -3,10 +3,12 @@ const fs = require("fs");
 const User = require("../Manager/UserManager");
 const Guild = require("../Manager/GuildManager");
 const Lang = require("../Manager/LangManager");
+const Item = require("../Manager/ItemManager");
 
 const user = new User();
 const guild = new Guild();
 const lang = new Lang();
+const item = new Item();
 
 let commands = fs.readdirSync("./commands");
 
@@ -47,9 +49,21 @@ describe("Testing UserManager", ()=>{
     it("removeMoney should return 10", ()=>{
         assert.strictEqual(user.removeMoney("a", 10).money, 10);
     });
+    it("getItemAmount should return -95", ()=>{
+        assert.strictEqual(user.getItemAmount("a", "0"), -95)
+    });
+    it("getInventories should return the inventory data", ()=>{
+        assert.deepStrictEqual(user.getInventory("a"), [{ amount: -95, id: "0" }])
+    });
+    it("addItem should add the data", ()=>{
+        assert.deepStrictEqual(user.addItem("a", "0", 100), { "0": 5 })
+    });
+    it("removeItem should add the data", ()=>{
+        assert.deepStrictEqual(user.removeItem("a", "0", 100), { "0": -95 })
+    });
     it("getJSON should return the data itself", ()=>{
-        assert.deepStrictEqual(user.getJSON("a"), {username: "a", money: 10});
-    })
+        assert.deepStrictEqual(user.getJSON("a"), { username: "a", money: 10, inventories: { "0": -95 } });
+    });
 });
 
 describe("Testing GuildManager", ()=>{
@@ -66,7 +80,7 @@ describe("Testing GuildManager", ()=>{
     it("getJSON should return the data itself", ()=>{
         assert.deepStrictEqual(guild.getJSON("a"), {name: "test", prefix: "pik"});
     });
-})
+});
 
 describe("Testing LangManager", ()=>{
     it("getLang should return a ${message.author.id}", ()=>{
@@ -81,4 +95,24 @@ describe("Testing LangManager", ()=>{
     it("getJSON should return object", ()=>{
         assert.strictEqual(typeof(lang.getJSON("test")), "object");
     })
-})
+    it("smallNum should return ⁵⁹⁹", ()=>{
+        assert.strictEqual(lang.smallNum(599), "⁵⁹⁹");
+    })
+    it("parseSmallNum should return 599", ()=>{
+        assert.strictEqual(lang.parseSmallNum(lang.smallNum(599)), 599);
+    })
+});
+
+describe("Testing ItemManager", ()=>{
+    it("getJSON should return object", ()=>{
+        assert.deepStrictEqual(typeof(item.getJSON()), "object");
+    });
+    it("getItem should return :rock:", ()=>{
+        assert.deepStrictEqual(item.getItem(1, "Forest"), ":rock:");
+    });
+    it("getRandom should return string", ()=>{
+        assert.deepStrictEqual(typeof(item.getRandom()), "string");
+        assert.deepStrictEqual(typeof(item.getRandom("Forest")), "string");
+        assert.deepStrictEqual(typeof(item.getRandom("Hunting")), "string");
+    });
+});
