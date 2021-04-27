@@ -83,6 +83,12 @@ describe("Testing LangManager", ()=>{
     it("getJSON should return object", ()=>{
         assert.strictEqual(typeof(lang.getJSON("test")), "object");
     })
+    it("smallNum should return ⁵⁹⁹", ()=>{
+        assert.strictEqual(lang.smallNum(599), "⁵⁹⁹");
+    })
+    it("parseSmallNum should return 599", ()=>{
+        assert.strictEqual(lang.parseSmallNum(lang.smallNum(599)), 599);
+    })
 });
 
 describe("Testing ItemManager", ()=>{
@@ -97,4 +103,5 @@ describe("Testing ItemManager", ()=>{
         assert.deepStrictEqual(typeof(item.getRandom("Forest")), "string");
         assert.deepStrictEqual(typeof(item.getRandom("Hunting")), "string");
     });
+    
 });

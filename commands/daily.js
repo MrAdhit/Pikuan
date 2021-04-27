@@ -31,7 +31,8 @@ module.exports = {
             let amount = Math.floor(Math.random() * 200 + 200);
             let dailyItem = item.getRandom();
 
-            message.channel.send(lang.parseVariable(lang.getLang("dailyMoney"), {userid: message.author.id, amount: amount, item: dailyItem}));
+            message.channel.send(lang.parseVariable(lang.getLang("dailyMoney"), {userid: message.author.id, amount: amount}));
+            message.channel.send(lang.parseVariable(lang.getLang("dailyItem"), {userid: message.author.id, item: dailyItem}));
 
             merged.user.addMoney(message.author.id, amount);
             merged.user.setDailyTime(message.author.id, dateTom.valueOf())
